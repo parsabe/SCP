@@ -1,118 +1,88 @@
-# VGG-16 Image Classification Project
+[![python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
-A fully customized and optimized **VGG-16-based deep learning pipeline** for image classification, designed to maximize model performance, reduce underfitting, and systematically compare optimizers (AdamW & SGD) using structured hyperparameter tuning and evaluation.
+[![logo](./logo.png)](https://github.com/hounaar)
 
----
+Overview
+--------
 
-## 🟢 Key Features & Improvements
+**Scientific Computing Project (SCP): Image Classification Pipeline**
 
-- **Modified VGG-16 Architecture:**
-  - Additional convolutional layers for deeper feature extraction.
-  - Batch Normalization after every Conv layer.
-  - Light Dropout regularization.
-  - Optional SE-Blocks and DropBlock modules.
+This project provides a **modular, extensible, and research-oriented deep learning pipeline** for image classification, developed as part of the Scientific Computing Project (SCP). It is designed for experimentation, hyperparameter optimization, and architecture extensibility.
+
+The first implemented architecture is based on **VGG-16**, with clear separation of training, tuning, and evaluation components. Additional architectures will be added in future updates.
+
+The pipeline offers:
+
+- Full control over training experiments
+- K-Fold Cross-Validation based hyperparameter tuning
+- Strong data augmentation & evaluation methodology
+- Clear and clean structure for further model extensions
+
+Features
+--------
+
+- **Research-Grade Modular Design**
+  - Multiple architecture support (VGG-16, others upcoming)
+  - Clear folder structure
 
 - **Training Strategy:**
-  - **Hyperparameter Tuning** with K-Fold Cross-Validation (K=3).
-  - Optimizer comparison: **AdamW** vs **SGD with Momentum**.
-  - Exponential learning rate decay.
-  - Early stopping with patience=7.
+  - Hyperparameter Tuning with K-Fold Cross-Validation (K=3)
+  - Optimizer comparison (AdamW & SGD with Momentum)
+  - Early stopping & learning rate scheduling
 
 - **Data Augmentation:**
-  - Random Horizontal & Vertical Flip
+  - Horizontal/Vertical Flip
   - Random Rotation, Shift, Scale
   - Color Jitter
   - CutMix / MixUp (optional)
 
-- **Loss Function:**
-  - Label Smoothing Cross Entropy Loss
-
-- **Evaluation & Visualization:**
-  - Training & Validation Loss/Accuracy curves
-  - Learning Rate Schedules
-  - Confusion Matrix & Classification Report
+- **Evaluation Metrics & Visualization:**
+  - Loss and Accuracy Curves
   - ROC & PR Curves
-  - F1 Score per class
-  - t-SNE embedding visualization
-  - Error analysis (lowest confidence, highest misclassifications)
+  - Confusion Matrix
+  - F1 Score & Per-Class Accuracy
   - Hyperparameter Tuning Result Visualization
+  - t-SNE Embedding Visualization
 
----
 
-## ⚙️ Hyperparameter Tuning Configuration
+Benchmarks
+----------
 
-- **K-FOLDS:** 3
-- **NUM_EPOCHS:** 50
-- **PATIENCE:** 7
-- **Learning Rate Grid:** `[0.001, 0.0005, 0.0001]`
-- **Batch Size Grid:** `[32, 64, 128]`
-- **Optimizers:** `AdamW` and `SGD with Momentum`
+The evaluation results and visualizations are saved under `results/` directory. They include:
 
-**Tuning Metric:** Validation Accuracy (average across folds)
+| Metric                      | Description                           |
+|:----------------------------|:--------------------------------------|
+| Training Loss Curve        | Loss vs Epochs during training        |
+| Validation Accuracy Curve  | Accuracy vs Epochs on validation set  |
+| Confusion Matrix           | Per-class classification visualization|
+| ROC & PR Curves            | Receiver Operating & Precision-Recall |
+| F1 Score                   | Per-class evaluation metric           |
+| t-SNE Plot                 | Embedding visualization               |
+| Hyperparameter Results     | Grid search visualization             |
+| Optimizer Comparison       | AdamW vs SGD test accuracy            |
 
----
 
-## 🧩 Training Pipeline Overview
+License and Reference
+---------------------
 
-1. **Data Loading & Augmentation:**
-   - Dataset split into Train, Validation, and Test.
-   - Augmentations applied only to Train set.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
-2. **Model Initialization:**
-   - VGG-16 backbone with added layers.
+If you use this project for academic or research purposes, please consider citing it or mentioning the contributors.
 
-3. **Hyperparameter Search:**
-   - Grid Search over learning rates, batch sizes, and optimizers.
-   - Cross-validation on each configuration.
+Contributors
+------------
 
-4. **Training with Best Hyperparameters:**
-   - Early stopping on validation loss.
-   - LR scheduling applied.
-   - Train & Validation metrics logged.S
+The following contributors are actively working on this project:
 
-5. **Evaluation:**
-   - Final test accuracy.
-   - Complete visualization report.
-   - Optimizer comparison charts.
-
----
-
-## 📊 Evaluation Results
-
-The following plots will be generated and saved in the `results/` folder:
-
-1. Training Loss Curve
-2. Validation Loss Curve
-3. Training Accuracy Curve
-4. Validation Accuracy Curve
-5. Learning Rate Curve
-6. Hyperparameter Tuning Results Plot
-7. Confusion Matrix
-8. Per-Class Accuracy Bar Plot
-9. Error Distribution per Class
-10. ROC Curve per Class
-11. Precision-Recall Curve per Class
-12. F1 Score per Class
-13. t-SNE Embedding Plot of Final Layer
-14. Sample Misclassifications
-15. Samples with Lowest Confidence
-16. Samples with Highest Error Distance
-17. Final Test Accuracy Comparison (AdamW vs SGD)
-18. Validation Accuracy vs Epochs Comparison
-19. Hyperparameter Grid Results Heatmap
-20. Calibration Curve
-
----
-
-## 👥 Contributors
-
-- <a href="https://github.com/Lars314159">Lars Wunderlich</a> 
+- <a href="https://github.com/Lars314159">Lars Wunderlich</a>
 - <a href="https://github.com/ToniMahojoni">Toni Sand</a>
 - <a href="https://github.com/hounaar">Parsa Besharat</a>
 
----
+Development Status
+------------------
 
-## 📝 License
+This project is in **active development** under the Scientific Computing Project (SCP). Additional architectures and evaluation modules will be added in future releases.
 
-This project is open-source and available under the MIT License.
+For questions, issues, or contributions, please use the [GitHub repository](https://github.com/hounaar).
 
