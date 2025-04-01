@@ -1,5 +1,8 @@
-[![python versions](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3364ff?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+
 
 [![logo](./logo.png)](https://github.com/hounaar)
 
