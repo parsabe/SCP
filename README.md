@@ -26,55 +26,7 @@ This project provides a **modular, extensible, and research-oriented deep learni
 
 The first implemented architecture is based on <a href="https://github.com/hounaar/SCP/tree/master/VGG-16">**VGG-16**</a>, with clear separation of training, tuning, and evaluation components. Additional architectures will be added in future updates.
 
-The pipeline offers:
 
-- Full control over training experiments
-- K-Fold Cross-Validation based hyperparameter tuning
-- Strong data augmentation & evaluation methodology
-- Clear and clean structure for further model extensions
-
-Features
---------
-
-- **Research-Grade Modular Design**
-  - Multiple architecture support (VGG-16, others upcoming)
-  - Clear folder structure
-
-- **Training Strategy:**
-  - Hyperparameter Tuning with K-Fold Cross-Validation (K=3)
-  - Optimizer comparison (AdamW & SGD with Momentum)
-  - Early stopping & learning rate scheduling
-
-- **Data Augmentation:**
-  - Horizontal/Vertical Flip
-  - Random Rotation, Shift, Scale
-  - Color Jitter
-  - CutMix / MixUp (optional)
-
-- **Evaluation Metrics & Visualization:**
-  - Loss and Accuracy Curves
-  - ROC & PR Curves
-  - Confusion Matrix
-  - F1 Score & Per-Class Accuracy
-  - Hyperparameter Tuning Result Visualization
-  - t-SNE Embedding Visualization
-
-
-Benchmarks
-----------
-
-The evaluation results and visualizations are saved under `results/` directory. They include:
-
-| Metric                      | Description                           |
-|:----------------------------|:--------------------------------------|
-| Training Loss Curve        | Loss vs Epochs during training        |
-| Validation Accuracy Curve  | Accuracy vs Epochs on validation set  |
-| Confusion Matrix           | Per-class classification visualization|
-| ROC & PR Curves            | Receiver Operating & Precision-Recall |
-| F1 Score                   | Per-class evaluation metric           |
-| t-SNE Plot                 | Embedding visualization               |
-| Hyperparameter Results     | Grid search visualization             |
-| Optimizer Comparison       | AdamW vs SGD test accuracy            |
 
 
 License and Reference
