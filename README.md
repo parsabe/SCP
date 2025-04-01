@@ -106,9 +106,9 @@ The following plots will be generated and saved in the `results/` folder:
 
 ## 👥 Contributors
 
-- <a href="https://github.com/hounaar">Parsa Besharat</a>
 - <a href="https://github.com/Lars314159">Lars Wunderlich</a> 
-- <a href="https://github.com/ToniMahojoni">Toni Sand</a> 
+- <a href="https://github.com/ToniMahojoni">Toni Sand</a>
+- <a href="https://github.com/hounaar">Parsa Besharat</a>
 
 ---
 
