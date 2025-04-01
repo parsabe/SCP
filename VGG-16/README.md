@@ -21,6 +21,33 @@ The model is initialized using PyTorch and extended for flexibility in research 
 
 ---
 
+Features
+--------
+
+- **Research-Grade Modular Design**
+  - Multiple architecture support (VGG-16, others upcoming)
+  - Clear folder structure
+
+- **Training Strategy:**
+  - Hyperparameter Tuning with K-Fold Cross-Validation (K=3)
+  - Optimizer comparison (AdamW & SGD with Momentum)
+  - Early stopping & learning rate scheduling
+
+- **Data Augmentation:**
+  - Horizontal/Vertical Flip
+  - Random Rotation, Shift, Scale
+  - Color Jitter
+  - CutMix / MixUp (optional)
+
+- **Evaluation Metrics & Visualization:**
+  - Loss and Accuracy Curves
+  - ROC & PR Curves
+  - Confusion Matrix
+  - F1 Score & Per-Class Accuracy
+  - Hyperparameter Tuning Result Visualization
+  - t-SNE Embedding Visualization
+---
+
 ## ⚙️ Hyperparameter Tuning Configuration
 
 The training process includes an automatic hyperparameter tuning phase to improve model generalization and performance.
@@ -85,20 +112,30 @@ The following evaluation outputs are generated and saved:
 - Error analysis: Misclassification samples, lowest confidence samples
 - Calibration Curve
 
+The pipeline offers:
+
+- Full control over training experiments
+- K-Fold Cross-Validation based hyperparameter tuning
+- Strong data augmentation & evaluation methodology
+- Clear and clean structure for further model extensions
+
 ---
 
-## 🚀 Model Results & Benchmark
+Benchmarks
+----------
 
-The tuned VGG-16 model achieves the following average metrics over K-Fold validation:
+The evaluation results and visualizations are saved under `results/` directory. They include:
 
-| Metric            | Value  |
-|-------------------|:-----:|
-| Validation Accuracy | ~93%  |
-| Validation Loss     | <0.1  |
-| Optimizer Comparison | AdamW slightly outperforming SGD |
-
-Detailed plots and results can be found in the `results/` directory.
-
+| Metric                      | Description                           |
+|:----------------------------|:--------------------------------------|
+| Training Loss Curve        | Loss vs Epochs during training        |
+| Validation Accuracy Curve  | Accuracy vs Epochs on validation set  |
+| Confusion Matrix           | Per-class classification visualization|
+| ROC & PR Curves            | Receiver Operating & Precision-Recall |
+| F1 Score                   | Per-class evaluation metric           |
+| t-SNE Plot                 | Embedding visualization               |
+| Hyperparameter Results     | Grid search visualization             |
+| Optimizer Comparison       | AdamW vs SGD test accuracy            |
 ---
 
 ## 🔮 Future Extensions
