@@ -24,7 +24,7 @@ Overview
 
 This project provides a **modular, extensible, and research-oriented deep learning pipeline** for image classification, developed as part of the Scientific Computing Project (SCP). It is designed for experimentation, hyperparameter optimization, and architecture extensibility.
 
-The first implemented architecture is based on **VGG-16**, with clear separation of training, tuning, and evaluation components. Additional architectures will be added in future updates.
+The first implemented architecture is based on <a href="https://github.com/hounaar/SCP/tree/master/VGG-16">**VGG-16**</a>, with clear separation of training, tuning, and evaluation components. Additional architectures will be added in future updates.
 
 The pipeline offers:
 
