@@ -4,21 +4,6 @@ A fully customized and optimized **VGG-16-based deep learning pipeline** for ima
 
 ---
 
-## 🚀 Project Structure
-
-```
-├── data/                   # Image dataset
-├── models/                 # Model architecture (VGG16 + modifications)
-├── train.py                # Training pipeline with hyperparameter tuning
-├── tune.py                 # Hyperparameter tuning module
-├── evaluate.py             # Evaluation & visualization pipeline
-├── utils/                  # Helper functions (data loaders, metrics, augmentations, etc.)
-├── results/                # Logs, model checkpoints, tuning results, plots
-└── README.md               # Project documentation
-```
-
----
-
 ## 🟢 Key Features & Improvements
 
 - **Modified VGG-16 Architecture:**
