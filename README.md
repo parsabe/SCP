@@ -1,10 +1,21 @@
-[![Python](https://img.shields.io/badge/Python-3364ff?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3364ff?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge">
+  </a>
+  <a href="https://pytorch.org/">
+    <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch Badge">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-purple.svg?style=for-the-badge" alt="MIT License Badge">
+  </a>
+</p>
 
+<p align="center">
+  <a href="https://github.com/hounaar">
+    <img src="./logo.png" alt="SCP Logo">
+  </a>
+</p>
 
-
-[![logo](./logo.png)](https://github.com/hounaar)
 
 Overview
 --------
