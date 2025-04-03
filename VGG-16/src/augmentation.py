@@ -64,7 +64,7 @@ def produce_image(img, resolution, rng):
                            (crop,True),
                            (hor_flip,False),
                            (ver_flip,False),
-                           (blur,False),
+                           (blur,True),
                            (brightness,False),
                            (contrast,False),
                            (color,False)]
@@ -115,7 +115,7 @@ def rotate(img, rng):
     return [img, f"Rotate: angle = {angle}"]
 
 def blur(img, rng):
-    value = rng.integers(1,3)
+    value = rng.integers(1,7)
     img = img.filter(ImageFilter.GaussianBlur(radius = value))
     return [img, f"Gaussian Blur: value = {value}"]
 
