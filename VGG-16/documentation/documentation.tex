@@ -22,7 +22,7 @@
 	
 	\section{Description of the Data Set}
 	\label{dataset}
-	The data set that is used for training the network consists of 10 classes of images. These are
+	The data set that is used for the project consists of 10 classes of images. These are
 	\begin{center}
 		\begin{tabular}{ c c c c c }
 			1. bottles & 2. mugs/cups & 3. spoons & 4. knifes & 5. forks \\ 
@@ -59,16 +59,33 @@
 		\caption{Example images of some classes}
 		\label{fig:nebeneinander}
 	\end{figure}
-	In the next step the image database was normalized \emph{(by doing...)} to make the training possible. To enlarge the database and improve the training process, we used data augmentation techniques in the following manner \emph{(insert detailed description...)}. \\
-	TODO: insert example augmented images \\
-	As a result of this preprocessing procedure, we got a database of ... images for the training and testing of our neural network.
+	In the next step the images of the database were normalized to a resolution of 56x56 pixels. That made the training possible, despite the different resolutions in the beginning. To enlarge the database and improve the training process, we used the following augmentation techniques: \\
+	\begin{itemize}
+		\item horizontal flip
+		\item vertical flip
+		\item crop
+		\item rotation 
+		\item blur
+		\item change of brightness
+		\item change of contrast
+		\item change of color
+	\end{itemize}
+	Here the intensity of the effects and attributes like the rotation angle are selected randomly based on a uniform distribution. It is also possible that more than one effect is applied simultaneously to one image. The number of these applied effects on this image is chosen randomly in the same manner but with a maximum of four. \\
+	\textbf{TODO: insert example augmented images} \\
+	As a result of this preprocessing procedure, we got 1500 images for every class and therefore a total database of around 15000 images for the training and testing of our neural network. 
 	
 	
 	\section{Architecture of the Network}
 	\label{architecture}
+	For our convolutional neural network we were given the architecture of a simplified VGG-16 that we should implement. A VGG-16 is characterized by a very deep but uniform architecture, i.e. many convolutional layers in a row with a kernel size of 3, followed by a pooling layer. The simplified version of the VGG-16 uses fewer repetitions of these layers. In our case we used 4 repetitions after the initial convolutional layers with max pooling. \\
+	\textbf{TODO: insert picture of the architecture} \\
+	The first convolutional layer gets the 56x56 image with the 3 color channels as input and convolutes it to 64 channels while preserving the resolution because of the kernel size of 3 and the padding of 1. After that another convolutional layer is applied again preserving both resolution and number of channels. The following max pooling halfes the image resolution to 28x28 due to the kernel size and stride of 2. This procedure is repeated with again 2 convolutional layers and a max pooling that halfes the image resolution and doubles the number of channels in the end. After this, there are 3 more repetitions acting in a similar manner but with 3 convolutional layers instead of 2. Subsequently 4 fully connected layers are applied. The reason for choosing such a high number of channels is to enable the network to learn the high variety of features in the complex input images and focus less on the spatial resolution. In the whole network ReLU is used as activation function. Furthermore we applied a batch normalization to the output of every convolutional layer so that the training process behaves more stable by fixing the means and variances of each layers inputs. This helps speeding up the training and improves the generalization properties, i.e. reducing overfitting.
+	
 	
 	\section{Training}
 	\label{training}
+	
+	
 	
 	\section{Results}
 	\label{results}
