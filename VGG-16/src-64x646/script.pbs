@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -N deep_learning_main
+#PBS -q teachingq
+#PBS -l select=1:ncpus=4:mem=16GB
+#PBS -l walltime=04:00:00
+#PBS -j oe
+#PBS -o logs/main_job_output.log
+
+# Change to the directory from which the job was submitted
+cd $PBS_O_WORKDIR
+
+# Load the required Python module (includes PyTorch)
+module load python/gcc/11.4.0
+
+# Run the main Python script
+python main.py
