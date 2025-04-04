@@ -56,10 +56,10 @@
 			\label{fig:bild2}
 		\end{subfigure}
 		\hfill
-		\caption{Example images of some classes}
+		\caption{Example images of the raw database}
 		\label{fig:nebeneinander}
 	\end{figure}
-	In the next step the images of the database were normalized to a resolution of 56x56 pixels. That made the training possible, despite the different resolutions in the beginning. To enlarge the database and improve the training process, we used the following augmentation techniques: \\
+	In the next step the images of the database were normalized to a resolution of 64x64 pixels. That made the training possible, despite the different resolutions in the beginning. To enlarge the database and improve the training process, we used the following augmentation techniques: \\
 	\begin{itemize}
 		\item horizontal flip
 		\item vertical flip
@@ -71,8 +71,36 @@
 		\item change of color
 	\end{itemize}
 	Here the intensity of the effects and attributes like the rotation angle are selected randomly based on a uniform distribution. It is also possible that more than one effect is applied simultaneously to one image. The number of these applied effects on this image is chosen randomly in the same manner but with a maximum of four. \\
-	\textbf{TODO: insert example augmented images} \\
-	As a result of this preprocessing procedure, we got 1500 images for every class and therefore a total database of around 15000 images for the training and testing of our neural network. 
+	\begin{figure}[h!]
+		\centering
+		% Erstes Bild
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{413_0.jpeg}
+			\caption{10. bike}
+			\label{fig:bild1}
+		\end{subfigure}
+		\hfill
+		% Zweites Bild
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{827_3.jpeg}
+			\caption{1. bottles}
+			\label{fig:bild2}
+		\end{subfigure}
+		\hfill
+		% Drittes Bild
+		\begin{subfigure}[b]{0.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{3435_1.jpeg}
+			\caption{3. spoons}
+			\label{fig:bild2}
+		\end{subfigure}
+		\hfill
+		\caption{Example images of the augmented database with different transformations and a resolution of 64x64 pixels}
+		\label{fig:nebeneinander}
+	\end{figure}
+	As a result of this preprocessing procedure, we got 1500 images for every class and therefore a total augmented database of around 15000 images with a resolution of 64x64 pixels for the training and testing of our neural network. 
 	
 	
 	\section{Architecture of the Network}

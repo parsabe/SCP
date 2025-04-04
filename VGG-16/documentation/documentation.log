@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  3 APR 2025 16:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  4 APR 2025 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -600,6 +600,27 @@ LaTeX Warning: Label `fig:bild2' multiply defined.
 
 LaTeX Warning: Label `sub@fig:bild2' multiply defined.
 
+
+LaTeX Warning: Label `fig:bild1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:bild1' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `fig:nebeneinander' multiply defined.
+
 )
 \openout1 = `documentation.aux'.
 
@@ -692,8 +713,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--63
 
 [2{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 } <./ex1.jpeg> <./ex3.jpeg> <./ex2.jpeg>]
+<413_0.jpeg, id=20, 56.21pt x 56.21pt>
+File: 413_0.jpeg Graphic file (type jpg)
+<use 413_0.jpeg>
+Package pdftex.def Info: 413_0.jpeg  used on input line 79.
+(pdftex.def)             Requested size: 125.47794pt x 125.49268pt.
+<827_3.jpeg, id=21, 56.21pt x 56.21pt>
+File: 827_3.jpeg Graphic file (type jpg)
+<use 827_3.jpeg>
+Package pdftex.def Info: 827_3.jpeg  used on input line 87.
+(pdftex.def)             Requested size: 125.47794pt x 125.49268pt.
+<3435_1.jpeg, id=22, 56.21pt x 56.21pt>
+File: 3435_1.jpeg Graphic file (type jpg)
+<use 3435_1.jpeg>
+Package pdftex.def Info: 3435_1.jpeg  used on input line 95.
+(pdftex.def)             Requested size: 125.47794pt x 125.49268pt.
 
-[3]
+
+[3 <./413_0.jpeg> <./827_3.jpeg> <./3435_1.jpeg>]
 
 [4] (./documentation.aux)
  ***********
@@ -706,10 +743,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19280 strings out of 473362
- 431880 string characters out of 5720990
+ 19301 strings out of 473362
+ 432241 string characters out of 5720990
  1512433 words of memory out of 5000000
- 42104 multiletter control sequences out of 15000+600000
+ 42125 multiletter control sequences out of 15000+600000
  563543 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,19n,135p,38249b,1954s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -719,10 +756,10 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></u
 sr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on documentation.pdf (4 pages, 6086528 bytes).
+Output written on documentation.pdf (4 pages, 6090588 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
+ 57 PDF objects out of 1000 (max. 8388607)
  32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
