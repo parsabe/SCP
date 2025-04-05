@@ -20,7 +20,7 @@ for opt in optimizers:
             continue
 
         history = np.load(file, allow_pickle=True).item()
-        acc = history["train_acc"]  # ✅ No multiplication
+        acc = history["train_acc"] 
         loss = history["train_loss"]
 
         all_acc.append(acc)
