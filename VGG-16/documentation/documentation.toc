@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Task}{2}{}%
-\contentsline {section}{\numberline {2}Description of the Data Set}{2}{}%
+\contentsline {section}{\numberline {2}Description of the Dataset}{2}{}%
 \contentsline {section}{\numberline {3}Architecture of the Network}{3}{}%
-\contentsline {section}{\numberline {4}Training}{4}{}%
-\contentsline {section}{\numberline {5}Results}{4}{}%
+\contentsline {section}{\numberline {4}Training}{5}{}%
+\contentsline {section}{\numberline {5}Results}{5}{}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
