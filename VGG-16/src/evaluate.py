@@ -25,7 +25,7 @@ def evaluate_model(model_name, visualize=True):
             all_probs.extend(probs.cpu().numpy())
 
     acc = accuracy_score(all_labels, all_preds)
-    print(f"\n🧪 Evaluation for Optimizer: {model_name}")
+    print(f"\nEvaluation for Optimizer: {model_name}")
     print(f"Test Accuracy: {acc * 100:.2f}%")
     report = classification_report(all_labels, all_preds, digits=4)
     print("\nClassification Report:")
