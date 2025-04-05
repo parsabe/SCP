@@ -25,7 +25,7 @@ def run_evaluation_only():
         print(f"\n{opt} - Test Accuracy: {acc * 100:.2f}%")
 
     if results:
-        print("\n📊 Final Evaluation Results:")
+        print("\nFinal Evaluation Results:")
         for opt, acc in results.items():
             print(f"{opt}: {acc:.2f}% Test Accuracy")
     else:
