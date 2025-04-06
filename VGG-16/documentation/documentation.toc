@@ -2,5 +2,5 @@
 \contentsline {section}{\numberline {2}Description of the Dataset}{2}{}%
 \contentsline {section}{\numberline {3}Architecture of the Network}{3}{}%
 \contentsline {section}{\numberline {4}Training}{5}{}%
-\contentsline {section}{\numberline {5}Results}{5}{}%
+\contentsline {section}{\numberline {5}Results}{6}{}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

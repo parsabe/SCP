@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  5 APR 2025 21:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 APR 2025 12:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,6 +640,30 @@ LaTeX Warning: Label `sub@fig:bild2' multiply defined.
 
 LaTeX Warning: Label `fig:nebeneinander' multiply defined.
 
+
+LaTeX Warning: Label `fig:bild1' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild1' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `fig:zwei_bilder' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild1' multiply defined.
+
+
+LaTeX Warning: Label `fig:bild2' multiply defined.
+
+
+LaTeX Warning: Label `fig:zwei_bilder' multiply defined.
+
 )
 \openout1 = `documentation.aux'.
 
@@ -761,7 +785,7 @@ Package pdftex.def Info: final3.png  used on input line 135.
 File: final4.png Graphic file (type png)
 <use final4.png>
 Package pdftex.def Info: final4.png  used on input line 141.
-(pdftex.def)             Requested size: 418.2455pt x 113.81068pt.
+(pdftex.def)             Requested size: 355.5128pt x 113.81068pt.
 
 
 LaTeX Warning: Float too large for page by 13.74432pt on input line 145.
@@ -783,7 +807,62 @@ Package pdftex.def Info: final6.png  used on input line 159.
 (pdftex.def)             Requested size: 418.23361pt x 199.162pt.
 
 
-[5 <./final5.png> <./final6.png>] (./documentation.aux)
+[5 <./final5.png> <./final6.png>]
+<training_accuracy_Adam_avg.png, id=45, 722.7pt x 433.62pt>
+File: training_accuracy_Adam_avg.png Graphic file (type png)
+<use training_accuracy_Adam_avg.png>
+Package pdftex.def Info: training_accuracy_Adam_avg.png  used on input line 180
+.
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+<training_accuracy_sgd_avg.png, id=47, 722.7pt x 433.62pt>
+File: training_accuracy_sgd_avg.png Graphic file (type png)
+<use training_accuracy_sgd_avg.png>
+Package pdftex.def Info: training_accuracy_sgd_avg.png  used on input line 185.
+
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+<training_loss_Adam_avg.png, id=48, 722.7pt x 433.62pt>
+File: training_loss_Adam_avg.png Graphic file (type png)
+<use training_loss_Adam_avg.png>
+Package pdftex.def Info: training_loss_Adam_avg.png  used on input line 198.
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+<training_loss_sgd_avg.png, id=49, 722.7pt x 433.62pt>
+File: training_loss_sgd_avg.png Graphic file (type png)
+<use training_loss_sgd_avg.png>
+Package pdftex.def Info: training_loss_sgd_avg.png  used on input line 203.
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[6 <./training_accuracy_Adam_avg.png> <./training_accuracy_SGD_avg.png>]
+<test_acc.png, id=55, 578.16pt x 433.62pt>
+File: test_acc.png Graphic file (type png)
+<use test_acc.png>
+Package pdftex.def Info: test_acc.png  used on input line 214.
+(pdftex.def)             Requested size: 418.25555pt x 313.68826pt.
+<confusion_matrix_Adam.png, id=56, 722.7pt x 433.62pt>
+File: confusion_matrix_Adam.png Graphic file (type png)
+<use confusion_matrix_Adam.png>
+Package pdftex.def Info: confusion_matrix_Adam.png  used on input line 223.
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+<confusion_matrix_SGD.png, id=57, 722.7pt x 433.62pt>
+File: confusion_matrix_SGD.png Graphic file (type png)
+<use confusion_matrix_SGD.png>
+Package pdftex.def Info: confusion_matrix_SGD.png  used on input line 228.
+(pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[7 <./training_loss_Adam_avg.png> <./training_loss_SGD_avg.png> <./test_acc.png
+>]
+
+[8 <./confusion_matrix_Adam.png> <./confusion_matrix_SGD.png>]
+(./documentation.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
@@ -794,22 +873,23 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 19740 strings out of 473362
- 439636 string characters out of 5720990
+ 19790 strings out of 473362
+ 441186 string characters out of 5720990
  1512433 words of memory out of 5000000
- 42558 multiletter control sequences out of 15000+600000
+ 42608 multiletter control sequences out of 15000+600000
  563543 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,19n,135p,38249b,1954s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
-usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on documentation.pdf (5 pages, 7137938 bytes).
+></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></u
+sr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on documentation.pdf (8 pages, 7354003 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 73 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 words of extra memory for PDF output out of 10000 (max. 10000000)
 

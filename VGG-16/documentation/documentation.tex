@@ -138,7 +138,7 @@
 		
 		\begin{minipage}{\textwidth}
 			\centering
-			\includegraphics[width=\textwidth, height=4cm]{final4.png}
+			\includegraphics[width=0.85\textwidth, height=4cm]{final4.png}
 			\caption{Third repetition with 3 convolutional layers and max-pooling}
 		\end{minipage}
 		
@@ -166,8 +166,73 @@
 	\section{Training}
 	\label{training}
 	
+	For training the network we started by finding the best hyperparameters using 3-fold cross-validation. Here the data is divided into 3 equally sized folds, where 2 of the folds is used for training and 1 fold is for testing. The reason for using $k=3$ is because of the relatively small database and the limited computational power that is available. Because for $k=3$ the model gets trained on a big partition of the data (two-thirds) and for fewer times, as for higher values of $k$. We used this procedure for finding the best optimizer, learning rate and batch size. As possible optimizers we tried ADAM and SGD and several combinations of different learning rates from 0.0005 to 0.1 with batch sizes between 32 and 128. As a result we got as best hyperparameters for the ADAM optimizer a learning rate of 0.0005 and batch size of 64. For SGD we got a learning rate of 0.1 with a batch size of 32. For the actual training we used these hyperparameters in combination with a number of epochs equal to 50. In Addition to have a better comparison between the two optimizers, we trained for both ADAM and SGD with the aforementioned hyperparameters. \\
+	In the original task it was required to split the dataset into 80\% training data and 20\% test data. When we first tried this configuration we encountered the problem that the connection to the cluster got disconnected after 24 hours and the training process remained unfinished. After reaching out to the University we got informed that using the cluster for longer then 24 hours is not possible due to security reasons. Therefore we could only train in this 80/20 configuration for less training epochs which lead to low accuracy and unsatisfying results. \\
+	To solve this problem we tried training the model again with a 3-fold cross-validation while using the best hyperparameters we determined before. By that we could reduce the training time to a little less then 24 hours while also achieving a relatively high accuracy.
+	
 	\section{Results}
 	\label{results}
+	As the result of our training process for both ADAM and SGD we got the following curves for the average accuracy and loss over all folds with respect to the training epochs (see Figure 9, 10).
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{training_accuracy_Adam_avg.png}
+			\label{fig:bild1}
+		\end{minipage} \hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{training_accuracy_sgd_avg.png}
+			\label{fig:bild2}
+		\end{minipage}
+		\caption{Average accuracy of ADAM and SGD with respect to training epochs}
+		\label{fig:zwei_bilder}
+	\end{figure}
+
+	Here we can see that the accuracy of both optimizers increases over the training process but does not exceed 60\%. Also the loss is decreasing which fits to the observations of the accuracy.
+
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{training_loss_Adam_avg.png}
+			\label{fig:bild1}
+		\end{minipage} \hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{training_loss_sgd_avg.png}
+			\label{fig:bild2}
+		\end{minipage}
+		\caption{Average loss of ADAM and SGD with respect to training epochs}
+		\label{fig:zwei_bilder}
+	\end{figure}
+
+	When testing the trained networks on new unknown data we got the following accuracies:
 	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\textwidth]{test_acc.png}
+		\caption{Comparison of the accuracy of both optimizers over test data}
+	\end{figure}
+	Here we can see that ADAM performs better on the unknown data with an accuracy of 67.33\%, whereas SGD has less accuracy of just 47.47\%. When looking at the corresponding confusion matrices, one can verify this result.
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{confusion_matrix_Adam.png}
+			\label{fig:bild1}
+		\end{minipage} \hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{confusion_matrix_SGD.png}
+			\label{fig:bild2}
+		\end{minipage}
+		\caption{Confusion matrices for ADAM and SGD for the test data}
+		\label{fig:zwei_bilder}
+	\end{figure}
+
+	In the confusion matrix of ADAM one can see that most of the predictions were correct, which is shown by the dark blue main diagonal. In comparison to that, the main diagonal in the confusion matrix of SGD is brighter representing less correct predictions. \\
+	To sum up, the model which was trained with the ADAM optimizer (with the best corresponding hyperparameters) performed better on the new data then SGD. But overall the accuracies are not very high at all. We also tried to use a 64x64 resolution for the data with the hope for improvement, but due to the restricted time for computation we couldn't finish a training process with a higher accuracy. This result could have been improved by having more using time of the cluster and higher computational power to enable a more complex training process. Also the architecture of the network could be improved. The original idea of VGG-16 is using lots of repetitions for the convolutional layers with pooling. By using more repetitions then just 4 like in our case, the networks performance could probably be improved. Because of the complex structure of our used images (e.g. high resolution, color) there is a high chance that a more deeper network would perform better by recognizing the complex features in the data. But that would also yield a higher computational effort which is again the problem from before. 
 	
 \end{document}
