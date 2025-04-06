@@ -214,8 +214,9 @@
 		\includegraphics[width=\textwidth]{test_acc.png}
 		\caption{Comparison of the accuracy of both optimizers over test data}
 	\end{figure}
-	Here we can see that ADAM performs better on the unknown data with an accuracy of 67.33\%, whereas SGD has less accuracy of just 47.47\%. When looking at the corresponding confusion matrices, one can verify this result.
+	Here we can see that ADAM performs better on the unknown data with an accuracy of 67.33\%, whereas SGD has less accuracy of just 47.47\%. When looking at the corresponding confusion matrices, one can verify this result (see Figure 12).
 	
+	To reduce the training time we also implemented a counter that counts the number of training epochs where no improvement happened. If this counter exceeds 7, the training for the current fold is skipped and the training with the new fold starts. Because in the training with ADAM there were no improvements after a certain epoch, the training wasn't executed until the 50th epoch but canceled earlier (see Figure 9, 10 for ADAM).
 	\begin{figure}[h!]
 		\centering
 		\begin{minipage}{0.45\textwidth}
@@ -232,7 +233,7 @@
 		\label{fig:zwei_bilder}
 	\end{figure}
 
-	In the confusion matrix of ADAM one can see that most of the predictions were correct, which is shown by the dark blue main diagonal. In comparison to that, the main diagonal in the confusion matrix of SGD is brighter representing less correct predictions. \\
+	In the confusion matrix of ADAM one can see that most of the predictions were correct, which is shown by the dark blue main diagonal. In comparison to that, the main diagonal in the confusion matrix of SGD is brighter, representing less correct predictions. \\
 	To sum up, the model which was trained with the ADAM optimizer (with the best corresponding hyperparameters) performed better on the new data then SGD. But overall the accuracies are not very high at all. We also tried to use a 64x64 resolution for the data with the hope for improvement, but due to the restricted time for computation we couldn't finish a training process with a higher accuracy. This result could have been improved by having more using time of the cluster and higher computational power to enable a more complex training process. Also the architecture of the network could be improved. The original idea of VGG-16 is using lots of repetitions for the convolutional layers with pooling. By using more repetitions then just 4 like in our case, the networks performance could probably be improved. Because of the complex structure of our used images (e.g. high resolution, color) there is a high chance that a more deeper network would perform better by recognizing the complex features in the data. But that would also yield a higher computational effort which is again the problem from before. 
 	
 \end{document}

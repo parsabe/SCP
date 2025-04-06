@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 APR 2025 12:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  6 APR 2025 14:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -845,17 +845,13 @@ Package pdftex.def Info: test_acc.png  used on input line 214.
 <confusion_matrix_Adam.png, id=56, 722.7pt x 433.62pt>
 File: confusion_matrix_Adam.png Graphic file (type png)
 <use confusion_matrix_Adam.png>
-Package pdftex.def Info: confusion_matrix_Adam.png  used on input line 223.
+Package pdftex.def Info: confusion_matrix_Adam.png  used on input line 224.
 (pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
 <confusion_matrix_SGD.png, id=57, 722.7pt x 433.62pt>
 File: confusion_matrix_SGD.png Graphic file (type png)
 <use confusion_matrix_SGD.png>
-Package pdftex.def Info: confusion_matrix_SGD.png  used on input line 228.
+Package pdftex.def Info: confusion_matrix_SGD.png  used on input line 229.
 (pdftex.def)             Requested size: 188.21371pt x 112.9238pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 
 
 [7 <./training_loss_Adam_avg.png> <./training_loss_SGD_avg.png> <./test_acc.png
@@ -886,7 +882,7 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></u
 sr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on documentation.pdf (8 pages, 7354003 bytes).
+Output written on documentation.pdf (8 pages, 7354389 bytes).
 PDF statistics:
  98 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
