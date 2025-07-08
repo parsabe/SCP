@@ -46,7 +46,7 @@ Features
   - F1 Score & Per-Class Accuracy
   - Hyperparameter Tuning Result Visualization
   - t-SNE Embedding Visualization
----
+
 
 ## Hyperparameter Tuning Configuration
 
@@ -63,7 +63,6 @@ The training process includes an automatic hyperparameter tuning phase to improv
 
 **Tuning Metric:** Validation Accuracy (mean across K folds)
 
----
 
 ## Data Augmentation & Preparation
 
@@ -76,7 +75,7 @@ To improve generalization and mitigate overfitting, various data augmentation te
 
 The dataset is split into **Train**, **Validation**, and **Test** sets.
 
----
+
 
 ## Training Pipeline
 
@@ -93,7 +92,6 @@ The training process is composed of the following steps:
    - Test accuracy calculated.
    - Metrics and plots saved in `results/`.
 
----
 
 ## Evaluation Metrics & Visualization
 
@@ -119,7 +117,7 @@ The pipeline offers:
 - Strong data augmentation & evaluation methodology
 - Clear and clean structure for further model extensions
 
----
+
 
 Benchmarks
 ----------
