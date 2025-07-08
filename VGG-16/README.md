@@ -156,7 +156,7 @@ The current pipeline is designed to support further extensions:
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and available under the **MIT License**.
 
