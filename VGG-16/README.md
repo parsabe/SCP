@@ -95,7 +95,7 @@ The training process is composed of the following steps:
 
 ---
 
-## 📊 Evaluation Metrics & Visualization
+## Evaluation Metrics & Visualization
 
 The following evaluation outputs are generated and saved:
 
