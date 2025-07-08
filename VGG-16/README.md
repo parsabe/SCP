@@ -6,7 +6,7 @@ This documentation covers the implementation details, design choices, and experi
 
 ---
 
-## 📄 Model Architecture
+## Model Architecture
 
 The VGG-16 model in this project has been implemented with the following characteristics:
 
