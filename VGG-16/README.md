@@ -78,7 +78,7 @@ The dataset is split into **Train**, **Validation**, and **Test** sets.
 
 ---
 
-## 🔥 Training Pipeline
+## Training Pipeline
 
 The training process is composed of the following steps:
 
