@@ -138,7 +138,7 @@ The evaluation results and visualizations are saved under `results/` directory. 
 | Optimizer Comparison       | AdamW vs SGD test accuracy            |
 ---
 
-## 🔮 Future Extensions
+## Future Extensions
 
 The current pipeline is designed to support further extensions:
 
