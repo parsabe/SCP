@@ -4,7 +4,7 @@
 
 This documentation covers the implementation details, design choices, and experimental setup of the **VGG-16-based Image Classification Pipeline** developed as part of the **Scientific Computing Project (SCP)**. The VGG-16 architecture serves as the **baseline model** in this project and will be followed by additional models in the future.
 
----
+
 
 ## Model Architecture
 
@@ -19,7 +19,7 @@ The VGG-16 model in this project has been implemented with the following charact
 
 The model is initialized using PyTorch and extended for flexibility in research experimentation.
 
----
+
 
 Features
 --------
@@ -150,7 +150,7 @@ The current pipeline is designed to support further extensions:
 
 ---
 
-## 👥 Contributors
+## Contributors
 
 - <a href="https://github.com/hounaar">Parsa Besharat</a>
 - <a href="https://github.com/Lars314159">Lars Wunderlich</a>
