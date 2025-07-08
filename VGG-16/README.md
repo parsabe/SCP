@@ -48,7 +48,7 @@ Features
   - t-SNE Embedding Visualization
 ---
 
-## ⚙️ Hyperparameter Tuning Configuration
+## Hyperparameter Tuning Configuration
 
 The training process includes an automatic hyperparameter tuning phase to improve model generalization and performance.
 
