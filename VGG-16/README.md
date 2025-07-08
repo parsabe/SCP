@@ -65,7 +65,7 @@ The training process includes an automatic hyperparameter tuning phase to improv
 
 ---
 
-## 🧩 Data Augmentation & Preparation
+## Data Augmentation & Preparation
 
 To improve generalization and mitigate overfitting, various data augmentation techniques are applied:
 
