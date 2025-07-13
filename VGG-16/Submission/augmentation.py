@@ -57,7 +57,6 @@ def augment(n_images_per_class: int,
     torch.save(X_test,os.path.join(output_path,"X_test.pt"))
     torch.save(Y_train,os.path.join(output_path,"Y_train.pt"))
     torch.save(Y_test,os.path.join(output_path,"Y_test.pt"))
-            
     
 def produce_image(img, resolution, rng):
     transformation_list = [(rotate,True),
