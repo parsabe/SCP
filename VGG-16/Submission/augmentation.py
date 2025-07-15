@@ -135,3 +135,6 @@ def color(img, rng):
     enhancer = ImageEnhance.Color(img)
     img = enhancer.enhance(value)
     return [img, f"Color: value = {value}"]
+
+
+
