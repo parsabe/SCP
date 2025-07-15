@@ -17,9 +17,6 @@
 </p>
 
 
-
-
-
 ## **Scientific Computing Project (SCP): Image Classification Pipeline**
 
 This project provides a **modular, extensible, and research-oriented deep learning pipeline** for image classification. It is designed for experimentation, hyperparameter optimization, and architecture extensibility.
