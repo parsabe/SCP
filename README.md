@@ -24,7 +24,6 @@ The first implemented architecture is based on <a href="https://github.com/houna
 You can download the augmented dataset <a href="https://github.com/hounaar/SCP/releases/tag/data">here</a>
 
 
-
 License and Reference
 ---------------------
 
