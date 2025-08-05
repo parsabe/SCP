@@ -12,7 +12,7 @@ def evaluate_model(model_name, visualize=True):
     model = SimplifiedVGG().to(DEVICE)
     model.load_state_dict(torch.load(f"best_model_{model_name}.pth"))
     model.eval()
-
+    
     _, test_loader = load_dataset.load_dataset(batch_size=32, path="/scratch/username")
 
     all_preds, all_labels, all_probs = [], [], []
@@ -159,3 +159,4 @@ if __name__ == "__main__":
             plt.tight_layout()
             plt.savefig(os.path.join(PLOT_PATH, f"training_loss_{opt}_avg.png"))
             plt.close()
+
