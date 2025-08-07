@@ -8,7 +8,6 @@ from config import DEVICE, NUM_CLASSES, PLOT_PATH
 from model import SimplifiedVGG
 from load_dataset import load_dataset
 
-
 def load_training_history():
     history = {
         "Adam": [],
@@ -183,3 +182,4 @@ if __name__ == "__main__":
     history = load_training_history()
     plot_training_curves(history)
     evaluate_and_plot_test()
+
