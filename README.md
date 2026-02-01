@@ -17,8 +17,6 @@
 </p>
 
 
-
-
 ## Scientific Computing Project (SCP): Image Classification Pipeline
 
 This project provides a **modular, extensible, and research-oriented deep learning pipeline** for image classification. It is designed for experimentation, hyperparameter optimization, and architecture extensibility.
@@ -53,6 +51,7 @@ Development Status
 This project is in **active development** under the Scientific Computing Project (SCP). Additional architectures and evaluation modules will be added in future releases.
 
 For questions, issues, or contributions, please use the [GitHub repository](https://github.com/hounaar).
+
 
 
 
