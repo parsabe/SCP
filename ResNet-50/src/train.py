@@ -7,6 +7,7 @@ import os
 
 # Assuming these are correctly defined in your config.py
 from config import optim, NUM_CLASSES, NUM_EPOCHS, K_FOLDS, PATIENCE, KFold, DataLoader, Subset, load_dataset
+from config import MODELS_PATH, HISTORY_PATH
 
 SEED = 42
 torch.manual_seed(SEED)
@@ -28,9 +29,11 @@ def mixup_data(x, y, alpha=0.2):
 
 class Trainer:
     def __init__(self, learning_rate=0.001, batch_size=32, optimizer_type="Adam"):
-        # 1. STRICT GPU CHECK
         assert torch.cuda.is_available(), "CRITICAL: CUDA is not available. This script requires a GPU."
         self.device = torch.device("cuda")
+        
+        gpu_name = torch.cuda.get_device_name(self.device)
+        print(f"\n[SYSTEM] Trainer initialized. Forcing execution on: {gpu_name}")
         
         self.batch_size = batch_size
         self.num_classes = NUM_CLASSES
@@ -153,7 +156,11 @@ class Trainer:
                     else:
                         state_dict_to_save = model.state_dict()
                         
-                    torch.save(state_dict_to_save, f"best_model_{self.optimizer_type}_fold{fold}.pth")
+                    # FIX: Save to the designated MODELS_PATH directory
+                    model_save_name = f"best_model_{self.optimizer_type}_fold{fold}.pth"
+                    model_save_path = os.path.join(MODELS_PATH, model_save_name)
+                    torch.save(state_dict_to_save, model_save_path)
+                    
                     print(f"--> Val Loss Improved. Model saved at epoch {epoch+1}")
                 else:
                     epochs_no_improve += 1
@@ -174,7 +181,12 @@ class Trainer:
 
             # End of Epoch Loop
             fold_results.append(best_val_acc_for_fold) 
-            np.save(f"training_history_{self.optimizer_type}_fold_{fold}.npy", history)
+            
+            # FIX: Save to the designated HISTORY_PATH directory
+            history_save_name = f"training_history_{self.optimizer_type}_fold_{fold}.npy"
+            history_save_path = os.path.join(HISTORY_PATH, history_save_name)
+            np.save(history_save_path, history)
+            
             print(f"Training history saved for fold {fold}.")
 
         # End of Fold Loop

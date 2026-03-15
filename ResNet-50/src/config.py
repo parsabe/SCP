@@ -21,9 +21,12 @@ K_FOLDS = 6
 PATIENCE = 7
 NUM_EPOCHS = 50
 
-BASE_PATH = r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\AdamVsSGD"
+
+BASE_PATH = r"C:\Users\parsa\Desktop\code\SCP\ResNet-50"
+
+# Define separated directories
+MODELS_PATH = os.path.join(BASE_PATH, "models")
+HISTORY_PATH = os.path.join(BASE_PATH, "history")
+PARAMS_PATH = os.path.join(BASE_PATH, "best_params")
 PLOT_PATH = os.path.join(BASE_PATH, "plots")
 EVAL_PATH = os.path.join(BASE_PATH, "evaluation")
-PARAMS_PATH = os.path.join(BASE_PATH, "best_params")
-
-

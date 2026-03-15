@@ -1,10 +1,20 @@
 import numpy as np
 import os
-from train import Trainer # Adjust this if your file is named differently
-from config import PARAMS_PATH
+import torch
+import sys
+from train import Trainer 
+from config import PARAMS_PATH, MODELS_PATH, HISTORY_PATH
 
 def run_hyperparameter_tuning():
+    # Strict CUDA Check
+    if not torch.cuda.is_available():
+        print("CRITICAL ERROR: CUDA not detected in tune.py. Exiting...")
+        sys.exit(1)
+
+    # Automatically create the separated directories
     os.makedirs(PARAMS_PATH, exist_ok=True)
+    os.makedirs(MODELS_PATH, exist_ok=True)
+    os.makedirs(HISTORY_PATH, exist_ok=True)
 
     param_space = {
         "Adam": [
@@ -39,7 +49,7 @@ def run_hyperparameter_tuning():
                 best_acc = val_acc
                 best_config = config
 
-        # Save best results for each optimizer type
+        # Save best results for each optimizer type into the separated best_params folder
         result = {"best_acc": best_acc, "best_config": best_config}
         np.save(os.path.join(PARAMS_PATH, f"best_params_{opt_type}.npy"), result)
 
