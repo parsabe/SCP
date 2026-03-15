@@ -17,7 +17,7 @@ import os
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 NUM_CLASSES = 10
-K_FOLDS = 3
+K_FOLDS = 6
 PATIENCE = 7
 NUM_EPOCHS = 50
 
