@@ -1,0 +1,49 @@
+# --- FOUNDATION & DATA ---
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+
+# --- CLASSICAL MACHINE LEARNING ---
+scikit-learn
+xgboost
+lightgbm
+catboost
+
+# --- DEEP LEARNING ---
+torch
+torchvision
+torchaudio
+tensorflow
+keras
+jax
+jaxlib
+
+# --- NLP & LLMs (GENERATIVE AI) ---
+transformers
+datasets
+tokenizers
+accelerate
+langchain
+langchain-community
+langgraph
+llama-index
+openai
+google-generativeai
+anthropic
+pydantic-ai
+litellm
+
+# --- COMPUTER VISION ---
+opencv-python
+diffusers
+mediapipe
+
+# --- AGENTS & DEPLOYMENT ---
+crewai
+ag2
+autogenstudio
+vllm
+fastapi
+uvicorn
