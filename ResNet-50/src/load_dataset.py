@@ -13,12 +13,12 @@ class CustomDataset(Dataset):
     def __len__(self):
         return len(self.X)
 
-def load_dataset(batch_size: int, path="/scratch/pb70gygu", seed=42):
+def load_dataset(batch_size: int, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\augmented_data", seed=42):
     generator = torch.Generator().manual_seed(seed)
-    X_train = torch.load(os.path.join(path, "X_train.pt"))
-    X_test = torch.load(os.path.join(path, "X_test.pt"))
-    Y_train = torch.load(os.path.join(path, "Y_train.pt"))
-    Y_test = torch.load(os.path.join(path, "Y_test.pt"))
+    X_train = torch.load(os.path.join(path, "X_train.pt"), weights_only=True)
+    Y_train = torch.load(os.path.join(path, "Y_train.pt"), weights_only=True)
+    X_test = torch.load(os.path.join(path, "X_test.pt"), weights_only=True)
+    Y_test = torch.load(os.path.join(path, "Y_test.pt"), weights_only=True)
 
     train_dataset = CustomDataset(X_train, Y_train)
     test_dataset = CustomDataset(X_test, Y_test)
