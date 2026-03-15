@@ -21,7 +21,7 @@ K_FOLDS = 6
 PATIENCE = 7
 NUM_EPOCHS = 50
 
-BASE_PATH = "/home/pb70gygu/AdamVsSGD"
+BASE_PATH = r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\AdamVsSGD"
 PLOT_PATH = os.path.join(BASE_PATH, "plots")
 EVAL_PATH = os.path.join(BASE_PATH, "evaluation")
 PARAMS_PATH = os.path.join(BASE_PATH, "best_params")

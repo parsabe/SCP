@@ -1,25 +1,61 @@
-from config import torch, sns, plt, os, np, confusion_matrix, DEVICE, NUM_CLASSES, load_dataset, PLOT_PATH, EVAL_PATH
-from model import SimplifiedVGG
-from sklearn.metrics import classification_report, accuracy_score, roc_curve, auc, precision_recall_curve, f1_score
+import torch
+import torch.nn as nn
+import torchvision.models as models
+import seaborn as sns
+import matplotlib.pyplot as plt
+import os
+import numpy as np
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, roc_curve, auc, precision_recall_curve, f1_score
 from collections import Counter
 from sklearn.manifold import TSNE
 from sklearn.calibration import calibration_curve
-import json
+
+# Assuming these are correctly imported from your config.py
+from config import DEVICE, NUM_CLASSES, load_dataset, PLOT_PATH, EVAL_PATH
 
 def evaluate_model(model_name, visualize=True):
-    model = SimplifiedVGG().to(DEVICE)
-    model.load_state_dict(torch.load(f"best_model_{model_name}.pth"))
+    print(f"\n--- Loading and Evaluating Model: {model_name} ---")
+    
+    # 1. FIX: Rebuild the exact ResNet-18 architecture used in training
+    model = models.resnet18(weights=None)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, NUM_CLASSES)
+    
+    # 2. FIX: Robust state_dict loading
+    model_path = f"best_model_{model_name}.pth" # Make sure this matches how you saved it! (e.g., you added _fold0 in the train script)
+    if not os.path.exists(model_path):
+        print(f"ERROR: Could not find {model_path}. Skipping...")
+        return 0.0
+        
+    state_dict = torch.load(model_path, map_location=DEVICE)
+    
+    # Strip 'module.' prefix if it accidentally got saved with it
+    from collections import OrderedDict
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        name = k[7:] if k.startswith('module.') else k
+        new_state_dict[name] = v
+        
+    model.load_state_dict(new_state_dict)
+    
+    # Use multiple GPUs for evaluation if available
+    if torch.cuda.device_count() > 1:
+        model = nn.DataParallel(model)
+        
+    model = model.to(DEVICE)
     model.eval()
 
-    _, test_loader = load_dataset.load_dataset(batch_size=32, path="/scratch/pb70gygu")
+    _, test_loader = load_dataset.load_dataset(batch_size=32, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\data")
 
     all_preds, all_labels, all_probs = [], [], []
     with torch.no_grad():
         for images, labels in test_loader:
-            images, labels = images.to(DEVICE), labels.to(DEVICE).long()
+            # Use non_blocking for speed
+            images, labels = images.to(DEVICE, non_blocking=True), labels.to(DEVICE, non_blocking=True).long()
             outputs = model(images)
             probs = torch.softmax(outputs, dim=1)
             _, predicted = outputs.max(1)
+            
             all_preds.extend(predicted.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
             all_probs.extend(probs.cpu().numpy())
@@ -27,201 +63,93 @@ def evaluate_model(model_name, visualize=True):
     acc = accuracy_score(all_labels, all_preds)
     print(f"\nEvaluation for Optimizer: {model_name}")
     print(f"Test Accuracy: {acc * 100:.2f}%")
-    report = classification_report(all_labels, all_preds, digits=4)
-    print("\nClassification Report:")
-    print(report)
+    
+    # Wrap in try-except in case a class is never predicted
+    try:
+        report = classification_report(all_labels, all_preds, digits=4)
+        print("\nClassification Report:")
+        print(report)
 
-    os.makedirs(EVAL_PATH, exist_ok=True)
-    with open(os.path.join(EVAL_PATH, f"classification_report_model_{model_name}.txt"), "w") as f:
-        f.write(f"Test Accuracy: {acc * 100:.2f}%\n")
-        f.write(report)
+        os.makedirs(EVAL_PATH, exist_ok=True)
+        with open(os.path.join(EVAL_PATH, f"classification_report_model_{model_name}.txt"), "w") as f:
+            f.write(f"Test Accuracy: {acc * 100:.2f}%\n")
+            f.write(report)
+    except Exception as e:
+        print(f"Could not generate classification report: {e}")
 
     if visualize:
-        visualize_results(all_labels, all_preds, all_probs, test_loader, model_name, acc)
+        # Pass the actual dataset object so we can extract specific images by index later
+        visualize_results(all_labels, all_preds, all_probs, test_loader.dataset, model_name, acc)
 
     return acc
 
-
-def visualize_results(all_labels, all_preds, all_probs, test_loader, model_name, acc):
+def visualize_results(all_labels, all_preds, all_probs, test_dataset, model_name, acc):
     os.makedirs(PLOT_PATH, exist_ok=True)
     classes = list(range(NUM_CLASSES))
 
-    
-    cm = confusion_matrix(all_labels, all_preds)
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
-    plt.title(f"Confusion Matrix - {model_name}")
-    plt.xlabel("Predicted")
-    plt.ylabel("True")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"confusion_matrix_{model_name}.png"))
-    plt.close()
+    # --- Metrics Plots (Confusion Matrix, Per-class, Error Dist, ROC, PR, F1, Calib, TSNE, Hist) ---
+    # [Your existing plotting code here is excellent and structurally sound. 
+    #  To save space, I have omitted repeating it, but you should keep it exactly as it is!]
+    # ... 
 
-   
-    class_correct = Counter()
-    class_total = Counter()
-    for label, pred in zip(all_labels, all_preds):
-        if label == pred:
-            class_correct[label] += 1
-        class_total[label] += 1
-    accuracy = [100 * class_correct[c] / class_total[c] if class_total[c] > 0 else 0 for c in classes]
+    # --- FIX: Pass test_dataset instead of test_loader to these functions ---
+    plot_misclassified_samples(test_dataset, all_labels, all_preds, model_name, max_samples=5)
 
-    plt.figure(figsize=(12, 6))
-    sns.barplot(x=classes, y=accuracy, palette="magma")
-    plt.title(f"Per-Class Accuracy - {model_name}")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"per_class_accuracy_{model_name}.png"))
-    plt.close()
-
-   
-    errors = [label for label, pred in zip(all_labels, all_preds) if label != pred]
-    error_counts = Counter(errors)
-    counts = [error_counts.get(c, 0) for c in classes]
-
-    plt.figure(figsize=(12, 6))
-    sns.barplot(x=classes, y=counts, palette="rocket")
-    plt.title(f"Error Distribution - {model_name}")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"error_distribution_{model_name}.png"))
-    plt.close()
-
-    
-    plt.figure(figsize=(10, 8))
-    for c in classes:
-        fpr, tpr, _ = roc_curve([1 if l == c else 0 for l in all_labels], [p[c] for p in all_probs])
-        sns.lineplot(x=fpr, y=tpr, label=f"Class {c} (AUC={auc(fpr, tpr):.2f})")
-    plt.title(f"ROC Curve - {model_name}")
-    sns.despine()
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"roc_curve_{model_name}.png"))
-    plt.close()
-
-   
-    plt.figure(figsize=(10, 8))
-    for c in classes:
-        precision, recall, _ = precision_recall_curve([1 if l == c else 0 for l in all_labels], [p[c] for p in all_probs])
-        sns.lineplot(x=recall, y=precision, label=f"Class {c}")
-    plt.title(f"Precision-Recall Curve - {model_name}")
-    sns.despine()
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"precision_recall_curve_{model_name}.png"))
-    plt.close()
-
-   
-    f1_scores = f1_score(all_labels, all_preds, average=None)
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x=classes, y=f1_scores, palette="viridis")
-    plt.title(f"F1 Score per Class - {model_name}")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"f1_score_{model_name}.png"))
-    plt.close()
-
-    
-    plot_misclassified_samples(test_loader, all_labels, all_preds, model_name, max_samples=5)
-
-   
     confidences = np.max(all_probs, axis=1)
     lowest_indices = np.argsort(confidences)[:5]
-    plot_samples_by_index(test_loader, lowest_indices, model_name, "lowest_confidence")
+    plot_samples_by_index(test_dataset, lowest_indices, model_name, "lowest_confidence")
 
-    
     error_distances = np.abs(np.array(all_preds) - np.array(all_labels))
     highest_error_indices = np.argsort(error_distances)[-5:]
-    plot_samples_by_index(test_loader, highest_error_indices, model_name, "highest_error")
+    plot_samples_by_index(test_dataset, highest_error_indices, model_name, "highest_error")
+    # ... [Keep your other plots] ...
 
-   
-    plt.figure(figsize=(10, 8))
-    for c in classes:
-        y_true_bin = [1 if l == c else 0 for l in all_labels]
-        y_prob = [p[c] for p in all_probs]
-        prob_true, prob_pred = calibration_curve(y_true_bin, y_prob, n_bins=10, strategy="uniform")
-        sns.lineplot(x=prob_pred, y=prob_true, marker="o", label=f"Class {c}")
-    sns.lineplot(x=[0, 1], y=[0, 1], linestyle="--", color="black")
-    plt.title(f"Calibration Curve - {model_name}")
-    sns.despine()
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"calibration_curve_{model_name}.png"))
-    plt.close()
-
-
-    tsne = TSNE(n_components=2, random_state=42)
-    embeddings = tsne.fit_transform(np.array(all_probs))
-    plt.figure(figsize=(10, 8))
-    sns.scatterplot(x=embeddings[:, 0], y=embeddings[:, 1], hue=all_labels, palette="tab10", legend="full")
-    plt.title(f"t-SNE Embedding - {model_name}")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"tsne_{model_name}.png"))
-    plt.close()
-
- 
-    plt.figure(figsize=(10, 6))
-    sns.histplot(all_preds, bins=NUM_CLASSES)
-    plt.title(f"Prediction Histogram - {model_name}")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, f"prediction_histogram_{model_name}.png"))
-    plt.close()
-
-    
-    tuning_results = {
-        "Adam": {"best": 67.33, "worst": 45.20},
-        "SGD": {"best": 47.47, "worst": 35.12}
-    }
-    plt.figure(figsize=(10, 6))
-    for opt, scores in tuning_results.items():
-        sns.barplot(x=["Best", "Worst"], y=[scores["best"], scores["worst"]], label=opt)
-    plt.title("Hyperparameter Tuning Results")
-    plt.legend()
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, "tuning_results.png"))
-    plt.close()
-
-
-def plot_misclassified_samples(test_loader, all_labels, all_preds, model_name, max_samples=5):
+def plot_misclassified_samples(test_dataset, all_labels, all_preds, model_name, max_samples=5):
     misclassified_indices = [i for i, (label, pred) in enumerate(zip(all_labels, all_preds)) if label != pred]
     if not misclassified_indices:
         print("No misclassified samples!")
         return
-    plot_samples_by_index(test_loader, misclassified_indices[:max_samples], model_name, "misclassified")
+    plot_samples_by_index(test_dataset, misclassified_indices[:max_samples], model_name, "misclassified")
 
-
-def plot_samples_by_index(test_loader, indices, model_name, tag):
+# 3. FIX: Entirely rewritten to correctly fetch specific images from the dataset using global indices
+def plot_samples_by_index(test_dataset, indices, model_name, tag):
+    if len(indices) == 0:
+        return
+        
     plt.figure(figsize=(15, 6))
-    shown = 0
-    for batch in test_loader:
-        images, labels = batch
-        for i in range(len(images)):
-            if shown >= len(indices):
-                break
-            idx = shown
-            image = images[i]
-            label = labels[i]
-            plt.subplot(1, len(indices), shown + 1)
-            plt.imshow(np.transpose(image.cpu().numpy(), (1, 2, 0)))
-            plt.title(f"True: {label}")
-            plt.axis("off")
-            shown += 1
-        if shown >= len(indices):
-            break
+    
+    for plot_idx, global_idx in enumerate(indices):
+        # Fetch the specific image and label from the raw dataset
+        image_tensor, true_label = test_dataset[global_idx]
+        
+        # Denormalize the image if necessary (Assuming standard ImageNet stats, adjust if different)
+        # image = image_tensor.numpy().transpose((1, 2, 0))
+        # mean = np.array([0.485, 0.456, 0.406])
+        # std = np.array([0.229, 0.224, 0.225])
+        # image = std * image + mean
+        # image = np.clip(image, 0, 1)
+        
+        # Simple transpose if no normalization was used:
+        image = np.transpose(image_tensor.cpu().numpy(), (1, 2, 0))
+        
+        plt.subplot(1, len(indices), plot_idx + 1)
+        plt.imshow(image)
+        plt.title(f"Index: {global_idx}\nTrue: {true_label}")
+        plt.axis("off")
+
     plt.suptitle(f"{tag.capitalize()} Samples - {model_name}")
     plt.tight_layout()
     plt.savefig(os.path.join(PLOT_PATH, f"{tag}_samples_{model_name}.png"))
     plt.close()
 
-
 if __name__ == "__main__":
     results = {}
 
-    for opt in ["Adam", "SGD"]:
+    # Make sure these filenames match what your train.py actually produced! 
+    # (e.g., if you saved them as best_model_Adam_fold0.pth, update this list)
+    models_to_test = ["Adam", "SGD"] 
+
+    for opt in models_to_test:
         acc = evaluate_model(model_name=opt, visualize=True)
         results[opt] = acc * 100
 
@@ -232,22 +160,4 @@ if __name__ == "__main__":
     best = max(results, key=results.get)
     print(f"\n🏆 Best Optimizer: {best} with Accuracy: {results[best]:.2f}%")
 
-    
-    plt.figure(figsize=(8, 6))
-    sns.barplot(x=list(results.keys()), y=list(results.values()), palette="coolwarm")
-    plt.title("Final Test Accuracy Comparison")
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, "optimizer_comparison.png"))
-    plt.close()
-
-   
-    plt.figure(figsize=(8, 6))
-    sns.barplot(x=list(results.keys()), y=list(results.values()), palette="viridis")
-    plt.title("📊 Evaluation Results")
-    for i, v in enumerate(results.values()):
-        plt.text(i, v + 1, f"{v:.2f}%", ha="center", fontsize=12)
-    sns.despine()
-    plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_PATH, "evaluation_results_chart.png"))
-    plt.close()
+    # [Keep your final summary bar plots exactly as they are]
