@@ -40,7 +40,7 @@ class Trainer:
         self.learning_rate = learning_rate
         self.optimizer_type = optimizer_type
                 
-        self.train_loader, _ = load_dataset.load_dataset(batch_size=self.batch_size, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\data")
+        self.train_loader, _ = load_dataset.load_dataset(batch_size=self.batch_size, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\augmented_data")
         self.kf = KFold(n_splits=self.k_folds, shuffle=True, random_state=SEED)
 
     def get_optimizer(self, model, steps_per_epoch):

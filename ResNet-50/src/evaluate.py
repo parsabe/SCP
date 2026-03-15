@@ -45,7 +45,7 @@ def evaluate_model(model_name, visualize=True):
     model = model.to(DEVICE)
     model.eval()
 
-    _, test_loader = load_dataset.load_dataset(batch_size=32, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\data")
+    _, test_loader = load_dataset.load_dataset(batch_size=32, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\augmented_data")
 
     all_preds, all_labels, all_probs = [], [], []
     with torch.no_grad():
