@@ -1,12 +1,10 @@
 import numpy as np
 import os
-from train import Trainer
+from train import Trainer # Adjust this if your file is named differently
 from config import PARAMS_PATH
 
 def run_hyperparameter_tuning():
-   
     os.makedirs(PARAMS_PATH, exist_ok=True)
-
 
     param_space = {
         "Adam": [
@@ -26,7 +24,10 @@ def run_hyperparameter_tuning():
         best_config = None
 
         for config in configs:
-            print(f"\nTrying Hyperparameters: {config} with Optimizer: {opt_type}")
+            print(f"\n" + "="*50)
+            print(f"Trying Hyperparameters: {config} with Optimizer: {opt_type}")
+            print("="*50)
+            
             trainer = Trainer(
                 learning_rate=config["learning_rate"],
                 batch_size=config["batch_size"],
@@ -38,11 +39,11 @@ def run_hyperparameter_tuning():
                 best_acc = val_acc
                 best_config = config
 
-     
+        # Save best results for each optimizer type
         result = {"best_acc": best_acc, "best_config": best_config}
         np.save(os.path.join(PARAMS_PATH, f"best_params_{opt_type}.npy"), result)
 
-        print(f"\n Best Hyperparameters for {opt_type}: {best_config} with Accuracy: {best_acc:.2f}%")
+        print(f"\n*** Best Hyperparameters for {opt_type}: {best_config} with Accuracy: {best_acc:.2f}% ***\n")
 
 if __name__ == "__main__":
     run_hyperparameter_tuning()
