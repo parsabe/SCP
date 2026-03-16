@@ -5,31 +5,39 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 import numpy as np
+import glob # ADDED: To help search for the fold files
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, roc_curve, auc, precision_recall_curve, f1_score
 from collections import Counter
 from sklearn.manifold import TSNE
 from sklearn.calibration import calibration_curve
 
-# Assuming these are correctly imported from your config.py
-from config import DEVICE, NUM_CLASSES, load_dataset, PLOT_PATH, EVAL_PATH
+# ADDED MODELS_PATH here
+from config import DEVICE, NUM_CLASSES, load_dataset, PLOT_PATH, EVAL_PATH, MODELS_PATH 
 
 def evaluate_model(model_name, visualize=True):
     print(f"\n--- Loading and Evaluating Model: {model_name} ---")
     
-    # 1. FIX: Rebuild the exact ResNet-18 architecture used in training
     model = models.resnet18(weights=None)
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, NUM_CLASSES)
     
-    # 2. FIX: Robust state_dict loading
-    model_path = f"best_model_{model_name}.pth" # Make sure this matches how you saved it! (e.g., you added _fold0 in the train script)
-    if not os.path.exists(model_path):
-        print(f"ERROR: Could not find {model_path}. Skipping...")
+    # ---------------------------------------------------------
+    # FIX: Dynamically search for the saved model in the MODELS_PATH
+    # ---------------------------------------------------------
+    search_pattern = os.path.join(MODELS_PATH, f"best_model_{model_name}_fold*.pth")
+    found_models = glob.glob(search_pattern)
+    
+    if not found_models:
+        print(f"ERROR: Could not find any trained models matching {search_pattern}. Skipping...")
         return 0.0
         
-    state_dict = torch.load(model_path, map_location=DEVICE)
+    # Just grab the first fold's model that it finds (e.g., fold0)
+    model_path = found_models[0] 
+    print(f"Successfully located weights: {model_path}")
+    # ---------------------------------------------------------
     
-    # Strip 'module.' prefix if it accidentally got saved with it
+    state_dict = torch.load(model_path, map_location=DEVICE, weights_only=True)
+    
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
@@ -38,15 +46,16 @@ def evaluate_model(model_name, visualize=True):
         
     model.load_state_dict(new_state_dict)
     
-    # Use multiple GPUs for evaluation if available
     if torch.cuda.device_count() > 1:
         model = nn.DataParallel(model)
         
     model = model.to(DEVICE)
     model.eval()
 
+    # Make sure this path points to your actual data folder just like in train.py!
     _, test_loader = load_dataset.load_dataset(batch_size=32, path=r"C:\Users\parsa\Desktop\code\SCP\ResNet-50\augmented_data")
 
+    # ... [Keep the rest of your evaluation loop exactly the same below this point] ...
     all_preds, all_labels, all_probs = [], [], []
     with torch.no_grad():
         for images, labels in test_loader:
